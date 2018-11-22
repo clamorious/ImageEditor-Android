@@ -81,22 +81,10 @@
             android:layout_height="fill_parent"
             android:layout_gravity="center" />
 
-        <com.xinlan.imageeditlibrary.editimage.view.StickerView
-            android:id="@+id/sticker_panel"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            android:visibility="gone" />
+
 
         <com.xinlan.imageeditlibrary.editimage.view.CropImageView
             android:id="@+id/crop_panel"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            android:visibility="gone" />
-
-        <com.xinlan.imageeditlibrary.editimage.view.RotateImageView
-            android:id="@+id/rotate_panel"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_gravity="center"

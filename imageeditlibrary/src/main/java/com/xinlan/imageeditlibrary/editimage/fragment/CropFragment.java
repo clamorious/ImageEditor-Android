@@ -52,15 +52,7 @@ public class CropFragment extends BaseEditFragment {
 	static {
 		// init data
 		dataList.add(new RatioItem("none", -1f));
-		dataList.add(new RatioItem("1:1", 1f));
-		dataList.add(new RatioItem("1:2", 1 / 2f));
-		dataList.add(new RatioItem("1:3", 1 / 3f));
-		dataList.add(new RatioItem("2:3", 2 / 3f));
-		dataList.add(new RatioItem("3:4", 3 / 4f));
-		dataList.add(new RatioItem("2:1", 2f));
-		dataList.add(new RatioItem("3:1", 3f));
-		dataList.add(new RatioItem("3:2", 3 / 2f));
-		dataList.add(new RatioItem("4:3", 4 / 3f));
+
 	}
 	private List<TextView> textViewList = new ArrayList<TextView>();
 
@@ -86,39 +78,6 @@ public class CropFragment extends BaseEditFragment {
 		return mainView;
 	}
 
-	private void setUpRatioList() {
-		// init UI
-		ratioList.removeAllViews();
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.WRAP_CONTENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT);
-		params.gravity = Gravity.CENTER_VERTICAL;
-		params.leftMargin = 20;
-		params.rightMargin = 20;
-		for (int i = 0, len = dataList.size(); i < len; i++) {
-			TextView text = new TextView(activity);
-			text.setTextColor(UNSELECTED_COLOR);
-			text.setTextSize(20);
-			text.setText(dataList.get(i).getText());
-			textViewList.add(text);
-			ratioList.addView(text, params);
-			text.setTag(i);
-			if (i == 0) {
-				selctedTextView = text;
-			}
-			dataList.get(i).setIndex(i);
-			text.setTag(dataList.get(i));
-			text.setOnClickListener(mCropRationClick);
-		}// end for i
-		selctedTextView.setTextColor(SELECTED_COLOR);
-	}
-
-	/**
-	 * 选择剪裁比率
-	 * 
-	 * @author
-	 * 
-	 */
 	private final class CropRationClick implements OnClickListener {
 		@Override
 		public void onClick(View v) {
@@ -140,7 +99,6 @@ public class CropFragment extends BaseEditFragment {
 
         backToMenu = mainView.findViewById(R.id.back_to_main);
         ratioList = (LinearLayout) mainView.findViewById(R.id.ratio_list_group);
-        setUpRatioList();
         this.mCropPanel = ensureEditActivity().mCropPanel;
 		backToMenu.setOnClickListener(new BackToMenuClick());// 返回主菜单
 	}

@@ -22,24 +22,17 @@ import android.widget.ViewFlipper;
 import com.xinlan.imageeditlibrary.BaseActivity;
 import com.xinlan.imageeditlibrary.R;
 import com.xinlan.imageeditlibrary.editimage.fragment.AddTextFragment;
-import com.xinlan.imageeditlibrary.editimage.fragment.BeautyFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.CropFragment;
-import com.xinlan.imageeditlibrary.editimage.fragment.FilterListFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.MainMenuFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.PaintFragment;
-import com.xinlan.imageeditlibrary.editimage.fragment.RotateFragment;
-import com.xinlan.imageeditlibrary.editimage.fragment.StickerFragment;
+import com.xinlan.imageeditlibrary.editimage.utils.BitmapUtils;
 import com.xinlan.imageeditlibrary.editimage.utils.FileUtil;
 import com.xinlan.imageeditlibrary.editimage.view.CropImageView;
 import com.xinlan.imageeditlibrary.editimage.view.CustomPaintView;
 import com.xinlan.imageeditlibrary.editimage.view.CustomViewPager;
-import com.xinlan.imageeditlibrary.editimage.view.RotateImageView;
-import com.xinlan.imageeditlibrary.editimage.view.StickerView;
 import com.xinlan.imageeditlibrary.editimage.view.TextStickerView;
 import com.xinlan.imageeditlibrary.editimage.view.imagezoom.ImageViewTouch;
-import com.xinlan.imageeditlibrary.editimage.utils.BitmapUtils;
 import com.xinlan.imageeditlibrary.editimage.view.imagezoom.ImageViewTouchBase;
-import com.xinlan.imageeditlibrary.editimage.widget.EditCache;
 import com.xinlan.imageeditlibrary.editimage.widget.RedoUndoController;
 
 /**
@@ -59,13 +52,9 @@ public class EditImageActivity extends BaseActivity {
     public static final String IMAGE_IS_EDIT = "image_is_edit";
 
     public static final int MODE_NONE = 0;
-    public static final int MODE_STICKERS = 1;// 贴图模式
-    public static final int MODE_FILTER = 2;// 滤镜模式
     public static final int MODE_CROP = 3;// 剪裁模式
-    public static final int MODE_ROTATE = 4;// 旋转模式
     public static final int MODE_TEXT = 5;// 文字模式
     public static final int MODE_PAINT = 6;//绘制模式
-    public static final int MODE_BEAUTY = 7;//美颜模式
 
     public String filePath;// 需要编辑图片路径
     public String saveFilePath;// 生成的新图片路径
@@ -86,21 +75,16 @@ public class EditImageActivity extends BaseActivity {
     private View applyBtn;// 应用按钮
     private View saveBtn;// 保存按钮
 
-    public StickerView mStickerView;// 贴图层View
     public CropImageView mCropPanel;// 剪切操作控件
-    public RotateImageView mRotatePanel;// 旋转操作控件
     public TextStickerView mTextStickerView;//文本贴图显示View
     public CustomPaintView mPaintView;//涂鸦模式画板
 
     public CustomViewPager bottomGallery;// 底部gallery
     private BottomGalleryAdapter mBottomGalleryAdapter;// 底部gallery
     private MainMenuFragment mMainMenuFragment;// Menu
-    public FilterListFragment mFilterListFragment;// 滤镜FliterListFragment
     public CropFragment mCropFragment;// 图片剪裁Fragment
-    public RotateFragment mRotateFragment;// 图片旋转Fragment
     public AddTextFragment mAddTextFragment;//图片添加文字
     public PaintFragment mPaintFragment;//绘制模式Fragment
-    public BeautyFragment mBeautyFragment;//美颜模式Fragment
     private SaveImageTask mSaveImageTask;
 
     private RedoUndoController mRedoUndoController;//撤销操作
@@ -161,9 +145,7 @@ public class EditImageActivity extends BaseActivity {
             }
         });
 
-        mStickerView = (StickerView) findViewById(R.id.sticker_panel);
         mCropPanel = (CropImageView) findViewById(R.id.crop_panel);
-        mRotatePanel = (RotateImageView) findViewById(R.id.rotate_panel);
         mTextStickerView = (TextStickerView) findViewById(R.id.text_sticker_panel);
         mPaintView = (CustomPaintView) findViewById(R.id.custom_paint_view);
 
@@ -173,12 +155,9 @@ public class EditImageActivity extends BaseActivity {
         mMainMenuFragment = MainMenuFragment.newInstance();
         mBottomGalleryAdapter = new BottomGalleryAdapter(
                 this.getSupportFragmentManager());
-        mFilterListFragment = FilterListFragment.newInstance();
         mCropFragment = CropFragment.newInstance();
-        mRotateFragment = RotateFragment.newInstance();
         mAddTextFragment = AddTextFragment.newInstance();
         mPaintFragment = PaintFragment.newInstance();
-        mBeautyFragment = BeautyFragment.newInstance();
 
         bottomGallery.setAdapter(mBottomGalleryAdapter);
 
@@ -221,14 +200,10 @@ public class EditImageActivity extends BaseActivity {
                     return mMainMenuFragment;
                 case CropFragment.INDEX://剪裁
                     return mCropFragment;
-                case RotateFragment.INDEX://旋转
-                    return mRotateFragment;
                 case AddTextFragment.INDEX://添加文字
                     return mAddTextFragment;
                 case PaintFragment.INDEX:
                     return mPaintFragment;//绘制
-                case BeautyFragment.INDEX://美颜
-                    return mBeautyFragment;
             }//end switch
             return MainMenuFragment.newInstance();
         }
@@ -274,17 +249,11 @@ public class EditImageActivity extends BaseActivity {
             case MODE_CROP:// 剪切图片保存
                 mCropFragment.backToMain();
                 return;
-            case MODE_ROTATE:// 旋转图片保存
-                mRotateFragment.backToMain();
-                return;
             case MODE_TEXT:
                 mAddTextFragment.backToMain();
                 return;
             case MODE_PAINT:
                 mPaintFragment.backToMain();
-                return;
-            case MODE_BEAUTY://从美颜模式中返回
-                mBeautyFragment.backToMain();
                 return;
         }// end switch
 
@@ -320,17 +289,11 @@ public class EditImageActivity extends BaseActivity {
                 case MODE_CROP:// 剪切图片保存
                     mCropFragment.applyCropImage();
                     break;
-                case MODE_ROTATE:// 旋转图片保存
-                    mRotateFragment.applyRotateImage();
-                    break;
                 case MODE_TEXT://文字贴图 图片保存
                     mAddTextFragment.applyTextImage();
                     break;
                 case MODE_PAINT://保存涂鸦
                     mPaintFragment.savePaintImage();
-                    break;
-                case MODE_BEAUTY://保存美颜后的图片
-                    mBeautyFragment.applyBeauty();
                     break;
                 default:
                     break;
@@ -471,10 +434,10 @@ public class EditImageActivity extends BaseActivity {
                 Toast.makeText(mContext, R.string.save_error, Toast.LENGTH_SHORT).show();
             }
         }
-    }//end inner class
+    }
 
     public Bitmap getMainBit() {
         return mainBitmap;
     }
 
-}// end class
+}
