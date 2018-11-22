@@ -78,11 +78,7 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        if (v == stickerBtn) {
-            onStickClick();
-        } else if (v == fliterBtn) {
-            onFilterClick();
-        } else if (v == cropBtn) {
+        if (v == cropBtn) {
             onCropClick();
         } else if (v == rotateBtn) {
             onRotateClick();
@@ -95,31 +91,7 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
         }
     }
 
-    /**
-     * 贴图模式
-     *
-     * @author panyi
-     */
-    private void onStickClick() {
-        activity.bottomGallery.setCurrentItem(StickerFragment.INDEX);
-        activity.mStickerFragment.onShow();
-    }
 
-    /**
-     * 滤镜模式
-     *
-     * @author panyi
-     */
-    private void onFilterClick() {
-        activity.bottomGallery.setCurrentItem(FilterListFragment.INDEX);
-        activity.mFilterListFragment.onShow();
-    }
-
-    /**
-     * 裁剪模式
-     *
-     * @author panyi
-     */
     private void onCropClick() {
         activity.bottomGallery.setCurrentItem(CropFragment.INDEX);
         activity.mCropFragment.onShow();

@@ -95,7 +95,6 @@ public class EditImageActivity extends BaseActivity {
     public CustomViewPager bottomGallery;// 底部gallery
     private BottomGalleryAdapter mBottomGalleryAdapter;// 底部gallery
     private MainMenuFragment mMainMenuFragment;// Menu
-    public StickerFragment mStickerFragment;// 贴图Fragment
     public FilterListFragment mFilterListFragment;// 滤镜FliterListFragment
     public CropFragment mCropFragment;// 图片剪裁Fragment
     public RotateFragment mRotateFragment;// 图片旋转Fragment
@@ -174,7 +173,6 @@ public class EditImageActivity extends BaseActivity {
         mMainMenuFragment = MainMenuFragment.newInstance();
         mBottomGalleryAdapter = new BottomGalleryAdapter(
                 this.getSupportFragmentManager());
-        mStickerFragment = StickerFragment.newInstance();
         mFilterListFragment = FilterListFragment.newInstance();
         mCropFragment = CropFragment.newInstance();
         mRotateFragment = RotateFragment.newInstance();
@@ -221,10 +219,6 @@ public class EditImageActivity extends BaseActivity {
             switch (index) {
                 case MainMenuFragment.INDEX:// 主菜单
                     return mMainMenuFragment;
-                case StickerFragment.INDEX:// 贴图
-                    return mStickerFragment;
-                case FilterListFragment.INDEX:// 滤镜
-                    return mFilterListFragment;
                 case CropFragment.INDEX://剪裁
                     return mCropFragment;
                 case RotateFragment.INDEX://旋转
@@ -277,12 +271,6 @@ public class EditImageActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         switch (mode) {
-            case MODE_STICKERS:
-                mStickerFragment.backToMain();
-                return;
-            case MODE_FILTER:// 滤镜编辑状态
-                mFilterListFragment.backToMain();// 保存滤镜贴图
-                return;
             case MODE_CROP:// 剪切图片保存
                 mCropFragment.backToMain();
                 return;
@@ -329,12 +317,6 @@ public class EditImageActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             switch (mode) {
-                case MODE_STICKERS:
-                    mStickerFragment.applyStickers();// 保存贴图
-                    break;
-                case MODE_FILTER:// 滤镜编辑状态
-                    mFilterListFragment.applyFilterImage();// 保存滤镜贴图
-                    break;
                 case MODE_CROP:// 剪切图片保存
                     mCropFragment.applyCropImage();
                     break;

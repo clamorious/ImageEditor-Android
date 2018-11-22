@@ -119,18 +119,7 @@ public class StickerFragment extends BaseEditFragment {
     @Override
     public void onShow() {
         activity.mode = EditImageActivity.MODE_STICKERS;
-        activity.mStickerFragment.getmStickerView().setVisibility(
-                View.VISIBLE);
         activity.bannerFlipper.showNext();
-    }
-
-    //导入贴图数据
-    private void loadStickersData() {
-        if (mLoadStickersTask != null) {
-            mLoadStickersTask.cancel(true);
-        }
-        mLoadStickersTask = new LoadStickersTask();
-        mLoadStickersTask.execute(1);
     }
 
 
