@@ -97,7 +97,7 @@ public class EditImageActivity extends BaseActivity {
      */
     public static void start(Activity context, final String editImagePath, final String outputPath, final int requestCode) {
         if (TextUtils.isEmpty(editImagePath)) {
-            Toast.makeText(context, R.string.no_choose, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.no_choose_image, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -380,7 +380,11 @@ public class EditImageActivity extends BaseActivity {
     protected void onSaveTaskDone() {
         Intent returnIntent = new Intent();
         returnIntent.putExtra(FILE_PATH, filePath);
-        returnIntent.putExtra(EXTRA_OUTPUT, saveFilePath);
+        if (mOpTimes > 0) {
+            returnIntent.putExtra(EXTRA_OUTPUT, saveFilePath);
+        } else { // return original file path if image was not edited
+            returnIntent.putExtra(EXTRA_OUTPUT, filePath);
+        }
         returnIntent.putExtra(IMAGE_IS_EDIT, mOpTimes > 0);
 
         FileUtil.ablumUpdate(this, saveFilePath);

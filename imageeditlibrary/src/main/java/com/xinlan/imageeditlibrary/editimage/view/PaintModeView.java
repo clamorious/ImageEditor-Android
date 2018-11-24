@@ -17,7 +17,7 @@ public class PaintModeView extends View {
     private Paint mPaint;
 
     private int mStokeColor;
-    private float mStokeWidth = -1;
+    private float mStokeWidth = 10;
 
     private float mRadius;
 
@@ -47,7 +47,7 @@ public class PaintModeView extends View {
         mPaint.setAntiAlias(true);
         mPaint.setColor(Color.RED);
 
-        //mStokeWidth = 10;
+        mStokeWidth = 10;
         //mStokeColor = Color.RED;
     }
 

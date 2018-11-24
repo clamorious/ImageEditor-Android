@@ -17,10 +17,10 @@
     <string name="materialcolorpicker__btnSelectColor">选择</string>
     <string name="saving_image">图片保存中...</string>
     <string name="input_hint">输入文本 ...</string>
-    <string name="no_choose">请选择一张需要编辑的图片</string>
+    <string name="no_choose_image">请选择一张需要编辑的图片</string>
     <string name="auto_newline">自动换行</string>
     <string name="save_error">图片保存失败</string>
-    <string name="handing">处理中...</string>
+    <string name="loading">处理中...</string>
 
     <string-array name="filters">
         <item>原始</item>
