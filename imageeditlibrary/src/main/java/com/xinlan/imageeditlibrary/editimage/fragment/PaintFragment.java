@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.xinlan.imageeditlibrary.R;
 import com.xinlan.imageeditlibrary.editimage.EditImageActivity;
@@ -153,7 +154,7 @@ public class PaintFragment extends BaseEditFragment implements View.OnClickListe
     @Override
     public void onMoreSelected(int position) {
         mColorPicker.show();
-        Button okColor = (Button) mColorPicker.findViewById(R.id.okColorButton);
+        TextView okColor = (TextView) mColorPicker.findViewById(R.id.okColorButton);
         okColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

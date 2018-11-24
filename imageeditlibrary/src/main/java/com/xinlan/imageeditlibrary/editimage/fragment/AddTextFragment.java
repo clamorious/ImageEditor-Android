@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.xinlan.imageeditlibrary.R;
 import com.xinlan.imageeditlibrary.editimage.EditImageActivity;
@@ -44,7 +45,6 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
     private EditText mInputText;//输入框
     private ImageView mTextColorSelector;//颜色选择器
     private TextStickerView mTextStickerView;// 文字贴图显示控件
-    private CheckBox mAutoNewLineCheck;
 
     private ColorPicker mColorPicker;
 
@@ -80,7 +80,6 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
         backToMenu = mainView.findViewById(R.id.back_to_main);
         mInputText = (EditText) mainView.findViewById(R.id.text_input);
         mTextColorSelector = (ImageView) mainView.findViewById(R.id.text_color);
-        mAutoNewLineCheck = (CheckBox) mainView.findViewById(R.id.check_auto_newline);
 
         backToMenu.setOnClickListener(new BackToMenuClick());// 返回主菜单
         mColorPicker = new ColorPicker(getActivity(), 255, 0, 0);
@@ -88,14 +87,12 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
         mInputText.addTextChangedListener(this);
         mTextStickerView.setEditText(mInputText);
 
-        //统一颜色设置
         mTextColorSelector.setBackgroundColor(mColorPicker.getColor());
         mTextStickerView.setTextColor(mColorPicker.getColor());
     }
 
     @Override
     public void afterTextChanged(Editable s) {
-        //mTextStickerView change
         String text = s.toString().trim();
         mTextStickerView.setText(text);
     }
@@ -117,7 +114,7 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
         @Override
         public void onClick(View v) {
             mColorPicker.show();
-            Button okColor = (Button) mColorPicker.findViewById(R.id.okColorButton);
+            TextView okColor = (TextView) mColorPicker.findViewById(R.id.okColorButton);
             okColor.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

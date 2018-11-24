@@ -33,6 +33,8 @@
     <string name="cancel">cancel</string>
 
     <string name="beauty">beauty</string>
+
     <string name="smooth">smooth</string>
     <string name="white_skin">white skin</string>
+    <string name="insert_text">Insert a text</string>
 </resources>

@@ -13,5 +13,7 @@
     <color name="materialcolorpicker__dialogcolor">#009688</color>
     <color name="hint_foreground_material_light">#00000000</color>
     <color name="header_image_editor">#1D5972</color>
+    <color name="icon_colors">#ffffff</color>
+    <color name="bottom_image_editor">#000000</color>
     <color name="hint_foreground_material_dark">#00000000</color>
 </resources>
